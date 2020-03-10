@@ -17,10 +17,12 @@
         </div>
     </div>
     @foreach($questions as $question)
-    <div class="row">
-        <div class="col-sm-6">
-            <p>{{ $question->question }}</p>
+    <a href="{{ route('question.question', ['id' => $question->id]) }}">
+        <div class="row">
+            <div class="col-sm-6">
+                <p>{{ $question->question }}</p>
+            </div>
         </div>
-    </div>
+    </a>
     @endforeach
 @endsection

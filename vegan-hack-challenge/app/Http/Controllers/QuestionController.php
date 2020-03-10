@@ -22,8 +22,26 @@ class QuestionController extends Controller
         $question = new Question([
             'question' => $request->input('question')
         ]);
-        $question->save();
+        $question->save();        
         return redirect()->route('question.index');
     }
 
+    public function getQuestion($id)
+    {
+        $question = Question::where('id', '=', $id)->with('answers')->first();
+        return view('question.question', ['question' => $question]);
+    }
+
+    public function postAnswerCreate(Request $request, $id)
+    {
+        $this->validate($request, [
+            'answer' => 'required|min:5'
+        ]);
+        $answer = new Answer([
+            'answer' => $request->input('answer'),
+            'question_id' => $id
+        ]);
+        $answer->save();
+        return redirect()->route('question.question', ['id' => $id]);
+    }
 }

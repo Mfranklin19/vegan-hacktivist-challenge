@@ -24,3 +24,13 @@ Route::post('create', [
     'as' => 'question.create'
 ]);
 
+Route::get('question/{id}', [
+    'uses' => 'QuestionController@getQuestion',
+    'as' => 'question.question'
+]);
+
+Route::post('question/{id}/answer', [
+    'uses' => 'QuestionController@postAnswerCreate',
+    'as' => 'question.question.answer'
+]);
+
