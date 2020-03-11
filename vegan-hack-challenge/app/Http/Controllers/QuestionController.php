@@ -10,8 +10,15 @@ class QuestionController extends Controller
 
     public function getIndex()
     {
-        $questions = Question::orderby('created_at', 'desc')->get();
-        return view('question.index', ['questions' => $questions]);
+        $questions = Question::orderby('created_at', 'desc')->with('answers')->get();
+        $examples = [
+            '1' => 'So wait... where do you get your protein?',
+            '2' => 'How can you tell someone is a vegan?',
+            '3' => 'What is wrong with dairy?',
+            '4' => 'Do you not miss cheese?',
+            '5' => 'How has it affected your health?'
+        ];
+        return view('question.index', ['questions' => $questions, 'examples' => $examples]);
     }
 
     public function postQuestionCreate(Request $request)

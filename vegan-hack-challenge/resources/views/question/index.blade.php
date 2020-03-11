@@ -2,27 +2,26 @@
 
 @section('content')
 @include('partials.errors')
-    <div class="row">
-        <div class="col-sm-6">
-            <form action="{{ route('question.create') }}" method="post">
-                <div class=form-group">
-                    <label for="question">Ask A Question!</label>
-                    <textarea class="form-control" id="question" name="question"></textarea>
-                </div>
-                {{ csrf_field() }}
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Post Question</button>
-                </div>
-            </form>
+    <form action="{{ route('question.create') }}" method="post">
+        <div class=form-group">
+            <label for="question"><h3>Ask A Question!</h3></label>
+            <textarea placeholder="{{ $examples[array_rand($examples)]  }}" class="form-control" id="question" name="question"></textarea>
         </div>
-    </div>
+        <br />
+        {{ csrf_field() }}
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary float-right">Post Question</button>
+        </div>
+    </form>
+    <br />
+    <h3>Previously Asked Questions</h3>
     @foreach($questions as $question)
+    <hr>
     <a href="{{ route('question.question', ['id' => $question->id]) }}">
-        <div class="row">
-            <div class="col-sm-6">
-                <p>{{ $question->question }}</p>
-            </div>
-        </div>
+        <p>
+            {{ $question->question }}
+            <button class="btn-primary btn-sm float-right">{{ count($question->answers).(count($question->answers)===1 ? ' Answer' : ' Answers')  }}</button>
+        </p>
     </a>
     @endforeach
 @endsection

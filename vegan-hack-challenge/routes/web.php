@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [
-    'uses' => 'QuestionController@getIndex',
+    'uses' =>'QuestionController@getIndex',
     'as' => 'question.index'
 ]);
 

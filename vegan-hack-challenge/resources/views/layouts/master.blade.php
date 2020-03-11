@@ -19,7 +19,11 @@
 <body>
 <div class="container">
 @include('partials.header')
+<div class="row">
+    <div class="col-md-6 mx-auto">
     @yield('content')
+    </div>
+</div>
 </div>
 </body>
 </html>
